@@ -1,0 +1,31 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+<div class="col-xs-6">
+    {%from "_macros.html" import alum_field}
+    <form action="" method="post">
+
+        <div class="row control-group">
+            <div class="form-group">
+                {{alum_field(form.matricula, class='from-control')}}
+            </div>
+        </div>
+
+        {{alum_field(form.nombre)}}
+        {{alum_field(form.apaterno)}}
+        {{alum_field(form.email)}}
+        <input type="submit" id="al" name="al" value="Registrar">
+
+    </form>
+</div>
+
+<div class="col-md-4">
+    <h1>Matricula:{{mat}}</h1><br>
+    <h1>nombre : {{nom}}</h1><br>
+    <h1></h1>
+</div>
+
+{% endblock %}
+
+    

@@ -1,0 +1,22 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+    <label>Resultados</label>
+    <br>
+        <label>Numero Maximo: {{maximo}}</label>
+        <br>
+        <label>Numero Minimo: {{minimo}}</label>
+        <br>
+        <label>Promedio: {{promedio}}</label>
+        <br>
+            {% for numero, cantidad in contador.items()%}
+                {% if cantidad > 1: %}
+                <label>Se repitieron:</label>
+                N.{{numero}} =  {{cantidad}} veces</h4>
+                {% endif %}
+            {% endfor %}
+
+
+
+{% endblock %}

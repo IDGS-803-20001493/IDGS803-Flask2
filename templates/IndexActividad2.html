@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../static/booststrap/bootstrap/css/bootstrap.min.css">
+
+    <style>
+        body{
+            padding-top: 60px;
+            padding-left: 20px;
+        }
+
+            .tr-head{background: cyan;
+            }
+    </style>
+    
+    <link rel="stylesheet" href="../static/booststrap/bootstrap/css/bootstrap-responsive.min.css">
+</head>
+<body>
+    <form action="/resultado" class="form-horizontal" method="POST">
+        <div>
+            <center>
+            <div class="card" style="max-width: 18rem; background-color: #0553a1;">
+                
+              
+            <img src="../static/img/cinepolis-logo-9.png">
+            <label for="" style="color: white">Nombre</label>
+            <input type="text" name="txtnombre">
+    
+            <label for="" style="color: white">Cantidad Compradores</label>
+            <input type="text" name="txtCantidadCompradores">
+    
+            <label style="color: white">Tarjeta Cineco</label>
+            <div>
+            <label style="color: white">Si</label><input type="radio" name="btnTarjeta" value="1" checked></input>
+            </div>
+            <div>
+            <label style="color: white">No</label><input type="radio" name="btnTarjeta" value="0"></input>
+            </div>
+            
+            <label for="" style="color: white">cantidad de Boletas</label>
+            <input type="text" name="txtCantidadBoletas">
+            <br>
+            <br>
+            <button type="submit">Procesar</button>
+            <br>
+            <br>
+        </div>
+        
+        
+        <div>
+            
+        </div>
+    </div>
+</center>
+    </form>
+        
+    
+</body>
+</html>
