@@ -2,21 +2,22 @@
 
 {% block content %}
 
-    <label>Resultados</label>
+<center>
     <br>
-        <label>Numero Maximo: {{maximo}}</label>
-        <br>
-        <label>Numero Minimo: {{minimo}}</label>
-        <br>
-        <label>Promedio: {{promedio}}</label>
-        <br>
+        <input value="Maximo : {{maximo}}" disabled />
+        <br><br>
+        <input value="Minimo : {{minimo}}" disabled />
+        <br><br>
+        <input value="promedio : {{promedio}}" disabled />
+        <br><br>
+        <label>Se repitieron:</label>
+        <textarea style="width: 300px; height: 200px;">
             {% for numero, cantidad in contador.items()%}
                 {% if cantidad > 1: %}
-                <label>Se repitieron:</label>
-                N.{{numero}} =  {{cantidad}} veces</h4>
+                #Numero-. {{numero}} =  {{cantidad}} veces. 
                 {% endif %}
             {% endfor %}
-
-
+        </textarea>
+        </center>
 
 {% endblock %}
