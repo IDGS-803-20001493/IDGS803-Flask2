@@ -1,0 +1,50 @@
+{% extends "layout.html"%}
+
+{% block content%}
+{% from "_macros.html" import render_colores%}
+{% from "_macros.html" import render_coloresTolerancia%}
+
+<form action="/resistencia" method="POST" novalidate>
+        <input name="csrf_token" value="{{csrf_token()}}" hidden/>
+
+        <center>
+            <img src="static/img/resistencia.png" width="300px" height="200px">
+        </center>
+        <div style="display: inline-block; position: relative; left: 518px; bottom: 163px; background-color: {{primerColor}}; width: 25px; height: 91px;"></div>
+        <div style="display: inline-block; position: relative; left: 539px; bottom: 172px; background-color: {{segundoColor}}; width: 25px; height: 73px;"></div>
+        <div style="display: inline-block; position: relative; left: 560px; bottom: 172px; background-color: {{tercerColor}}; width: 25px; height: 73px;"></div>
+        <div style="display: inline-block; position: relative; left: 608px; bottom: 163px; background-color: {{cuartoColor}}; width: 15px; height: 91px;"></div>  
+
+        <div>
+            <label style="display: inline-block; position: relative; left: 230px;">Primer Banda</label>
+            <label style="display: inline-block; position: relative; left: 360px;">Segunda Banda</label>
+            <label style="display: inline-block; position: relative; left: 485px;">Tercer Banda</label>
+            <label style="display: inline-block; position: relative; left: 620px;">Cuarta Banda</label>
+        </div>
+<center>
+
+    {{ render_colores("primerBanda", primero) }}
+    {{ render_colores("segundaBanda", segundo) }}
+    {{ render_colores("tercerBanda", tercero) }}
+    {{ render_coloresTolerancia("cuartaBanda", cuarto) }}
+    
+<br>
+<label>ultimo Calculo: {{historial}}</label>
+<br>
+<br>
+<label>Resultados:</label>
+<label>Total: {{total}}Ω Ohms</label>
+
+<label>Mínimo: {{minimo}}</label>
+
+<label>Máximo: {{maximo}}</label>
+
+
+
+</center>
+
+
+
+</form>
+
+{%endblock%}

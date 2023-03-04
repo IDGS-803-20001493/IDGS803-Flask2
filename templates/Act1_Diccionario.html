@@ -4,7 +4,7 @@
 {% from "_macros.html" import render_field%}
 
 <form action="/guardar" method="POST" novalidate>
-    {{form.csrf_token}}
+        {{form.csrf_token}}
         <input name="csrf_token" value="{{csrf_token()}}" hidden/>
 {{render_field(form.español)}}
 {{render_field(form.ingles)}}
@@ -12,17 +12,17 @@
 </form>
 
 <hr>
-<form action="/resultado" method="POST" novalidate>
+<form action="/busqueda" method="POST" novalidate>
     {{form.csrf_token}}
         <input name="csrf_token" value="{{csrf_token()}}" hidden/>
-    <label>Español</label>
-    <input type="radio" name="btnLenguaje"/>
-    <label>Ingles</label>
-    <input type="radio" name="btnLenguaje"/>
-    <button type="submit">Guardar</button>
-
-    <lable>Resultado</lable>
-    <textarea style="height: 200px; width: 200px;"></textarea>
+    
+    <br>
+    <label>Filtro: <input name="txtFiltro"/> <button type="submit">Buscar</button></label>
+    <br><br>
+    <input value="Español" type="radio" name="btnLenguaje"/> Español
+    <input value="Ingles" type="radio" name="btnLenguaje"/>Ingles
+    <br><br>
+    <textarea style="height: 100px; width: 200px;"> {{resultado}}</textarea>
 </form>
 
 {%endblock%}

@@ -33,9 +33,9 @@ class LoginForm(Form):
 class DiccionarioForm(Form):
     ingles=StringField('ingles',[
         validators.data_required(message='el campos es requerido'),
-        validators.length(min=4,max=15,message='no cumple con la longitud del campo')
+        validators.length(min=2,max=15,message='no cumple con la longitud del campo')
         ])
     español = StringField('español',[
         validators.data_required(message='el campos es requerido'),
-        validators.length(min=4,max=15,message='no cumple con la longitud del campo')
+        validators.length(min=2,max=15,message='no cumple con la longitud del campo')
         ])

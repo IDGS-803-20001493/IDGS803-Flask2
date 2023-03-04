@@ -42,6 +42,47 @@ def saludo():
     return render_template('saludo.html', nom=nombres[0])
 
 
+@app.route("/resistencia",methods=['GET','POST'])
+def resistencia():
+    historial=request.cookies.get('ultimaResistencia')
+
+    if request.method=='POST':
+        
+        colores = ['black','chocolate','red','orangered','yellow','green','blue','purple','gray','white']
+        tolerancia = ['goldenrod', 'silver']
+
+        primerBanda = int(request.form.get('primerBanda'))
+        segundaBanda = int(request.form.get('segundaBanda'))
+        tercerBanda = int(request.form.get('tercerBanda'))
+        cuartaBanda = int(request.form.get('cuartaBanda'))
+
+        porcentajeTolerancia=int(10)
+        if cuartaBanda == 0:
+            porcentajeTolerancia=int(5)
+
+        total = str(primerBanda) + "" + str(segundaBanda) + str( '0' * tercerBanda) 
+
+        minimo = int(int(total) * (1 - (int(porcentajeTolerancia) / 100)))
+        maximo = int(int(total) * (1 + (int(porcentajeTolerancia) / 100)))
+
+        response = make_response(
+            render_template('Act2_Resistencias.html', total=total + "Ω Ohms "+ str(porcentajeTolerancia) + "%",
+                               minimo=minimo,maximo=maximo,
+                               primero=str(primerBanda), segundo=str(segundaBanda),
+                               tercero=str(tercerBanda),cuarto=str(cuartaBanda),
+                               primerColor=colores[primerBanda],segundoColor=colores[segundaBanda],
+                               tercerColor=colores[tercerBanda], cuartoColor=tolerancia[cuartaBanda],
+                               historial = historial))
+        
+        response.set_cookie("ultimaResistencia", total + "Ω Ohms "+ str(porcentajeTolerancia) + "%")
+
+        return response
+    else:
+        
+        return render_template('Act2_Resistencias.html', total=0 ,minimo=0,maximo=0, historial=historial)
+
+
+   
 
 
 
@@ -70,8 +111,61 @@ def alumnos():
 
 @app.route("/guardar", methods=['GET','POST'])
 def guardar():
+    
     form_lenguaje = forms.DiccionarioForm(request.form)
+    
+    if form_lenguaje.validate():
+        español=str(form_lenguaje.español.data).upper()
+        ingles=str(form_lenguaje.ingles.data).upper()
+
+        e=open('español.txt','a')
+        e.write(español + ",")
+        e.close()
+
+        i=open('ingles.txt','a')
+        i.write(ingles+ ",")
+        i.close()
+
+        succes_message="Se ha registrado correctamente"
+        flash(succes_message)
+    
     return render_template('Act1_Diccionario.html',  form=form_lenguaje)
+
+@app.route("/busqueda", methods=['GET','POST'])
+def busqueda():
+    
+    filtro = str(request.form.get('txtFiltro')).upper()
+    idioma = str(request.form.get('btnLenguaje'))
+
+    form_lenguaje = forms.DiccionarioForm(request.form)
+
+    with open("español.txt", "r") as español:
+        contenidoEspañol = español.read()
+
+    listaEspañol = contenidoEspañol.split(",")
+    listaEspañol = [elemento.strip() for elemento in listaEspañol]
+
+    with open("ingles.txt", "r") as ingles:
+        contenidoIngles = ingles.read()
+
+    listaIngles = contenidoIngles.split(",")
+    listaIngles = [elemento.strip() for elemento in listaIngles]
+
+    resultado = "No hubo coincidencias"
+
+    if idioma == "Ingles":
+        if filtro in listaEspañol:
+            posicion = str(listaEspañol.index(filtro))
+            resultado = listaIngles[int(posicion)]
+
+    if idioma == "Español":
+        if filtro in listaIngles:
+            posicion = str(listaIngles.index(filtro))
+            resultado = listaEspañol[int(posicion)]
+
+           
+    return render_template('Act1_Diccionario.html',  form=form_lenguaje, resultado = resultado)
+
 
 
 if __name__ == "__main__":
